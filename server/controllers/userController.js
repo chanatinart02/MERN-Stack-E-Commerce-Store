@@ -23,7 +23,7 @@ const createUser = asyncHandler(async (req, res) => {
 
   try {
     await newUser.save();
-    //   after register create token and set it in cookie
+    //   after register create JWT token and set it in cookie
     createToken(res, newUser._id);
 
     res.status(201).json({
@@ -38,4 +38,45 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { createUser };
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  // Check user in db
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+    if (isPasswordValid) {
+      createToken(res, existingUser._id);
+
+      res.status(201).json({
+        _id: existingUser._id,
+        username: existingUser.username,
+        email: existingUser.email,
+        isAdmin: existingUser.isAdmin,
+      });
+      return; // exit the func after sending response
+    }
+  }
+});
+
+const logoutUser = asyncHandler(async (req, res) => {
+  // Clear JWT token in cookie
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+// @GET /api/users/
+// @access Admin
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+});
+
+export { createUser, loginUser, logoutUser, getAllUsers };
