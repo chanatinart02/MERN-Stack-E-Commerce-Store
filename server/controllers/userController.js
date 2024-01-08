@@ -42,6 +42,8 @@ const createUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) throw new Error("Please fill all inputs");
+
   // Check user in db
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -63,6 +65,8 @@ const loginUser = asyncHandler(async (req, res) => {
       res.status(401);
       throw new Error("Email or Password is not valid");
     }
+  } else {
+    throw new Error("Email not found Please register");
   }
 });
 

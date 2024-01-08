@@ -3,6 +3,7 @@ import { apiSlice } from "./apiSlice";
 import { USERS_URL } from "../constants";
 
 // injectEndpoints used to extend the existing API slice (apiSlice) with additional endpoints(user endpoint).
+// Ex. http://localhost:5173/api/users/auth for login
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //   adds endpoint with a mutation query for user auth.
@@ -13,6 +14,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
     logout: builder.mutation({
       query: () => ({
         url: `${USERS_URL}/logout`,
