@@ -38,6 +38,7 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @POST /api/users/auth
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
