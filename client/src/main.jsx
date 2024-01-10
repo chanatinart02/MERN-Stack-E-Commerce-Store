@@ -11,6 +11,10 @@ import { Provider } from "react-redux";
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 
+// Private Route
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import Profile from "./pages/User/Profile.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +27,17 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      // Private routes must auth
+      {
+        path: "",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },
