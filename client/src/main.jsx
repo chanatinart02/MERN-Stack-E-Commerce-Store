@@ -15,6 +15,10 @@ import Register from "./pages/Auth/Register.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/User/Profile.jsx";
 
+// Admin Routes
+import AdminRoute from "./pages/Admin/AdminRoute.jsx";
+import UserList from "./pages/Admin/UserList.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +40,17 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+        ],
+      },
+      // Admin Routes
+      {
+        path: "admin",
+        element: <AdminRoute />,
+        children: [
+          {
+            path: "userList",
+            element: <UserList />,
           },
         ],
       },
