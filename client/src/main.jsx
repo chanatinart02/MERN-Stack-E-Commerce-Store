@@ -18,6 +18,7 @@ import Profile from "./pages/User/Profile.jsx";
 // Admin Routes
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
 import UserList from "./pages/Admin/UserList.jsx";
+import CategoryList from "./pages/Admin/CategoryList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,12 @@ const router = createBrowserRouter([
         element: <AdminRoute />,
         children: [
           {
-            path: "userList",
+            path: "userlist",
             element: <UserList />,
+          },
+          {
+            path: "categoryList",
+            element: <CategoryList />,
           },
         ],
       },
