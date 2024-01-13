@@ -26,7 +26,7 @@ app.use("/api/upload", uploadRoutes);
 // Serve static assets (such as uploaded images) from the "uploads" directory
 const __dirname = path.resolve();
 // any files in the "uploads" directory will be accessible to clients via the specified URL path
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 
 app.listen(port, () => {
   connectDB();
