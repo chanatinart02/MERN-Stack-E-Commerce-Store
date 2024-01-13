@@ -1,32 +1,64 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
-  useCreateProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
+  useGetProductByIdQuery,
   useUploadProductImageMutation,
 } from "../../redux/api/productsApiSlice";
 import { useFetchCategoriesQuery } from "../../redux/api/catApiSlice";
 import AdminMenu from "./AdminMenu";
 
-const ProductList = () => {
-  // State for form inputs
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [brand, setBrand] = useState("");
-  const [stock, setStock] = useState(0);
-  const [image, setImage] = useState("");
-  const [imageUrl, setImageUrl] = useState(null); //show example image
+const ProductUpdate = () => {
+  const params = useParams();
+
+  const { data: productData } = useGetProductByIdQuery(params._id);
+
+  const [image, setImage] = useState(productData?.image || "");
+  const [name, setName] = useState(productData?.name || "");
+  const [description, setDescription] = useState(
+    productData?.description || ""
+  );
+  const [price, setPrice] = useState(productData?.price || "");
+  const [category, setCategory] = useState(productData?.categoryId || "");
+  const [quantity, setQuantity] = useState(productData?.quantity || "");
+  const [brand, setBrand] = useState(productData?.brand || "");
+  const [stock, setStock] = useState(productData?.countInStock || 0);
 
   const navigate = useNavigate();
 
-  // API query and mutation hooks from Redux Toolkit
+  const { data: categories = [] } = useFetchCategoriesQuery();
   const [uploadProductImage] = useUploadProductImageMutation();
-  const [createProduct] = useCreateProductMutation();
-  const { data: categories } = useFetchCategoriesQuery();
+  const [updateProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
+
+  useEffect(() => {
+    if (productData && productData._id) {
+      setName(productData.name);
+      setDescription(productData.description);
+      setPrice(productData.price);
+      setCategory(productData.categories?._id);
+      setQuantity(productData.quantity);
+      setBrand(productData.brand);
+      setImage(productData.image);
+    }
+  }, [productData]);
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      // Update state with image details
+      setImage(res.image);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,13 +75,16 @@ const ProductList = () => {
       productData.append("brand", brand);
       productData.append("countInStock", stock);
 
-      //  createProduct mutation to add a new product
-      const { data } = await createProduct(productData);
+      //  updateProduct mutation to update a product
+      const { data } = await updateProduct({
+        productId: params._id,
+        productData,
+      });
       if (data.error) {
-        toast.error("Product create failed. Try again.");
+        toast.error(data.error);
       } else {
-        toast.success(`${data.name} is created.`);
-        navigate("/");
+        toast.success(`${data.name} is updated.`);
+        navigate("/admin/allproductslist");
       }
     } catch (error) {
       console.log(error);
@@ -57,18 +92,21 @@ const ProductList = () => {
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-
+  const handleDelete = async () => {
     try {
-      const res = await uploadProductImage(formData).unwrap();
-      toast.success(res.message);
-      // Update state with image details
-      setImage(res.image);
-      setImageUrl(res.image);
+      let answer = window.confirm(
+        "Are you sure, you want to delete this product?"
+      );
+
+      if (!answer) return;
+
+      await deleteProduct(params._id);
+
+      toast.success("Delete product successfully");
+      navigate("/admin/allproductslist");
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      console.log(error);
+      toast.error("Product delete failed. Try again");
     }
   };
 
@@ -81,10 +119,10 @@ const ProductList = () => {
             Create Product
           </div>
           {/* Display the uploaded image */}
-          {imageUrl && (
+          {image && (
             <div className="text-center">
               <img
-                src={imageUrl}
+                src={image}
                 alt="product"
                 className="block mx-auto max-h-[200px]"
               />
@@ -186,12 +224,20 @@ const ProductList = () => {
                 </select>
               </div>
             </div>
-            <button
-              onClick={handleSubmit}
-              className="p-4 w-full rounded-lg text-lg font-bold bg-pink-600 text-center"
-            >
-              Submit
-            </button>
+            <div className="flex space-x-4 justify-end">
+              <button
+                onClick={handleSubmit}
+                className="p-4 w-[20%] rounded-lg text-lg font-bold bg-blue-600 text-center"
+              >
+                Update
+              </button>
+              <button
+                onClick={handleDelete}
+                className="p-4 w-[20%]  rounded-lg text-lg font-bold bg-pink-600 text-center"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -199,4 +245,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductUpdate;

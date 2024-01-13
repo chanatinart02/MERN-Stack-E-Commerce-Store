@@ -24,6 +24,7 @@ const productApiSlice = apiSlice.injectEndpoints({
     // Fetches a list of all available products
     allProducts: builder.query({
       query: () => `${PRODUCT_URL}/allproducts`,
+      providesTags: ["Product"],
     }),
 
     // Fetches detailed information of a single product by id
@@ -103,4 +104,5 @@ export const {
   useGetTopProductsQuery,
   useGetNewProductsQuery,
   useUploadProductImageMutation,
+  useAllProductsQuery,
 } = productApiSlice;

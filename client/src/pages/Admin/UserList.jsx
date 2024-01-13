@@ -9,6 +9,7 @@ import {
   useDeleteUserMutation,
   useUpdateUserMutation,
 } from "../../redux/api/usersApiSlice";
+import AdminMenu from "./AdminMenu";
 
 const UserList = () => {
   // State to manage editable user details
@@ -71,7 +72,7 @@ const UserList = () => {
         </Message>
       ) : (
         <div className="flex flex-col md:flex-row">
-          {/* AdminMenu */}
+          <AdminMenu />
           {/* User List Table */}
           <table className="w-full md:w-4/5 mx-auto">
             <thead>

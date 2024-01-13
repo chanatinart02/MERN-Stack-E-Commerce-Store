@@ -9,6 +9,7 @@ import {
 } from "../../redux/api/catApiSlice";
 import CategoryForm from "../../components/CategoryForm";
 import Modal from "../../components/Modal";
+import AdminMenu from "./AdminMenu";
 
 const CategoryList = () => {
   const [name, setName] = useState(""); // for creating a new category
@@ -90,7 +91,7 @@ const CategoryList = () => {
 
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row">
-      {/* Admin menu */}
+      <AdminMenu />
 
       <div className="md:w-3/4 p-3">
         <div className="h-12 text-center">Manage Categories</div>
