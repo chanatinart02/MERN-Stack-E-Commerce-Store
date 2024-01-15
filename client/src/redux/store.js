@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice";
 import favoriteReducer from "./features/favorites/favoriteSlice";
+import cartReducer from "./features/cart/cartSlice";
 import { getFavoritesFromLocalStorage } from "../Utils/localStorage";
 
 const initialFavorites = getFavoritesFromLocalStorage() || [];
@@ -15,6 +16,7 @@ const store = configureStore({
     //   sliceName : reducer func
     auth: authReducer, // authSlice
     favorites: favoriteReducer,
+    cart: cartReducer,
   },
   // initial state for all slices (option)
   preloadedState: {
