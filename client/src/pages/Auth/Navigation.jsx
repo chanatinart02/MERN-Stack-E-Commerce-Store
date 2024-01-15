@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLogoutMutation } from "../../redux/api/usersApiSlice";
-import { logout } from "../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineShopping,
@@ -10,8 +10,10 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import FavoritesCount from "../Products/FavoritesCount";
+import { useLogoutMutation } from "../../redux/api/usersApiSlice";
+import { logout } from "../../redux/features/auth/authSlice";
 
 import "./Navigation.css";
 
@@ -51,7 +53,7 @@ const Navigation = () => {
       style={{ zIndex: 9999 }}
       className={`${
         showSidebar ? "hidden" : "flex"
-      }   sm:hidden lg:flex flex-col justify-between p-4 text-white bg-black w-[5%] hover:w-[15%] h-[100vh] fixed`}
+      }   sm:hidden lg:flex flex-col justify-between p-4 text-white bg-black w-[5%] hover:w-[15%] h-full fixed`}
       id="navigation-container"
     >
       {/* Navigation links */}
@@ -79,12 +81,14 @@ const Navigation = () => {
           </div>
         </Link>
 
-        <Link
-          to="/favorite"
-          className="flex items-center transition-transform transform hover:translate-x-2"
-        >
-          <FaHeart className="mr-2 mt-[3rem]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">Favorite</span>{" "}
+        <Link to="/favorite" className="flex relative">
+          <div className="flex justify-center items-center transition-transform transform hover:translate-x-2">
+            <FaHeart className="mt-[3rem] mr-2" size={20} />
+            <span className="hidden nav-item-name mt-[3rem]">
+              Favorites
+            </span>{" "}
+            <FavoritesCount />
+          </div>
         </Link>
       </div>
 
@@ -92,11 +96,16 @@ const Navigation = () => {
       <div className="relative">
         <button
           onClick={toggleDropdown}
-          className="flex items-center text-gray-800 focus:outline-none"
+          className="flex text-gray-800 focus:outline-none"
         >
           {/* Show when user is logged in */}
           {userInfo ? (
-            <span className="text-white">{userInfo.username} </span>
+            <div className="flex justify-center items-center transition-transform transform hover:translate-x-2 mb-4 gap-2">
+              <CgProfile size={26} style={{ color: "white" }} />
+              <span className=" hidden nav-item-name text-white">
+                {userInfo.username}{" "}
+              </span>
+            </div>
           ) : (
             <></>
           )}

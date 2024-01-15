@@ -26,9 +26,7 @@ router.get("/allproducts", fetchAllProducts); // get latest 12 products
 router.get("/top", fetchTopProducts); // get top 4 rating products
 router.get("/new", fetchNewProducts); // get recently added products
 
-router
-  .route("/:id/reviews")
-  .post(authenticate, authorizeAdmin, checkId, addProductReview);
+router.route("/:id/reviews").post(authenticate, checkId, addProductReview);
 
 router
   .route("/:id")
