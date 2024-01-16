@@ -13,6 +13,7 @@ import {
   addProductReview,
   fetchTopProducts,
   fetchNewProducts,
+  filterProducts,
 } from "../controllers/productController.js";
 
 const router = express.Router();
@@ -25,6 +26,7 @@ router
 router.get("/allproducts", fetchAllProducts); // get latest 12 products
 router.get("/top", fetchTopProducts); // get top 4 rating products
 router.get("/new", fetchNewProducts); // get recently added products
+router.route("/filtered-products").post(filterProducts);
 
 router.route("/:id/reviews").post(authenticate, checkId, addProductReview);
 

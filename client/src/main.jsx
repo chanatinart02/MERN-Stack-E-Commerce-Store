@@ -15,6 +15,7 @@ import Favorites from "./pages/Products/Favorites.jsx";
 import Home from "./pages/Home.jsx";
 import ProductDetails from "./pages/Products/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import Shop from "./pages/Shop.jsx";
 
 // Private Route
 import PrivateRoute from "./components/PrivateRoute.jsx";
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "shop",
+        element: <Shop />,
       },
       // Private routes must auth
       {

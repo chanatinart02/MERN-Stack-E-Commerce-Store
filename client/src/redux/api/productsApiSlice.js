@@ -82,6 +82,14 @@ const productApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
 
+    getFilteredProducts: builder.query({
+      query: ({ checked, radio }) => ({
+        url: `${PRODUCT_URL}/filtered-products`,
+        method: "POST",
+        body: { checked, radio },
+      }),
+    }),
+
     // Uploads an image for a product and returns the URL of the uploaded image
     uploadProductImage: builder.mutation({
       query: (data) => ({
@@ -103,6 +111,7 @@ export const {
   useCreateReviewMutation,
   useGetTopProductsQuery,
   useGetNewProductsQuery,
+  useGetFilteredProductsQuery,
   useUploadProductImageMutation,
   useAllProductsQuery,
 } = productApiSlice;

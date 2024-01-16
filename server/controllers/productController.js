@@ -223,6 +223,31 @@ const fetchNewProducts = asyncHandler(async (_req, res) => {
   }
 });
 
+// POST /api/products/filtered-products
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+
+    // Initialize an object to hold query arguments
+    let args = {};
+
+    // If `checked` array has elements, add `categoryId` to the query arguments
+    // `checked` should contain the IDs of categories to filter by
+    if (checked.length > 0) args.categoryId = checked;
+
+    // If `radio` array has elements, construct a range query for price
+    // `radio` is expected to have two elements: [minPrice, maxPrice]
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    const products = await Product.find(args);
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 export {
   addProduct,
   updateProduct,
@@ -233,4 +258,5 @@ export {
   addProductReview,
   fetchTopProducts,
   fetchNewProducts,
+  filterProducts,
 };
