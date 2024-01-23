@@ -25,6 +25,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/orders", orderRoutes);
 
+app.get("/api/config/paypal", (req, res) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+});
+
 // Serve static assets (such as uploaded images) from the "uploads" directory
 const __dirname = path.resolve();
 // any files in the "uploads" directory will be accessible to clients via the specified URL path
