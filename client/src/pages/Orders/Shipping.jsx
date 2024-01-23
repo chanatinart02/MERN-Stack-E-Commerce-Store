@@ -31,7 +31,9 @@ const Shipping = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(
+      saveShippingAddress({ address, city, postcode: postalCode, country })
+    );
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };

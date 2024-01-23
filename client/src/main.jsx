@@ -21,6 +21,7 @@ import Shop from "./pages/Shop.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import Shipping from "./pages/Orders/Shipping.jsx";
+import PlaceOrder from "./pages/Orders/placeOrder.jsx";
 
 // Admin Routes
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
           {
             path: "shipping",
             element: <Shipping />,
+          },
+          {
+            path: "placeorder",
+            element: <PlaceOrder />,
           },
         ],
       },
