@@ -20,6 +20,7 @@ import Shop from "./pages/Shop.jsx";
 // Private Route
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/User/Profile.jsx";
+import Shipping from "./pages/Orders/Shipping.jsx";
 
 // Admin Routes
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+          {
+            path: "shipping",
+            element: <Shipping />,
           },
         ],
       },
