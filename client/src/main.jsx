@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import App from "./App.jsx";
 import "./index.css";
 
 import store from "./redux/store";
-import { Provider } from "react-redux";
 
 // Auth
 import Login from "./pages/Auth/Login.jsx";
@@ -22,6 +23,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import Shipping from "./pages/Orders/Shipping.jsx";
 import PlaceOrder from "./pages/Orders/placeOrder.jsx";
+import Order from "./pages/Orders/Order.jsx";
 
 // Admin Routes
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
@@ -81,6 +83,10 @@ const router = createBrowserRouter([
             path: "placeorder",
             element: <PlaceOrder />,
           },
+          {
+            path: "/order/:id",
+            element: <Order />,
+          },
         ],
       },
       // Admin Routes
@@ -116,6 +122,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <PayPalScriptProvider>
+      <RouterProvider router={router} />
+    </PayPalScriptProvider>
   </Provider>
 );
