@@ -183,6 +183,7 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
+      // Get the payment result from paypal
       order.paymentResult = {
         id: req.body.id,
         status: req.body.status,
@@ -190,7 +191,7 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
         email_address: req.body.payer.email_address,
       };
 
-      const updateOrder = await Order.save();
+      const updateOrder = await order.save();
       res.status(200).json(updateOrder);
     } else {
       res.status(404).json({ error: "Order not found" });
