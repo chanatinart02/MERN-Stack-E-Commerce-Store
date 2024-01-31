@@ -17,6 +17,7 @@ import Home from "./pages/Home.jsx";
 import ProductDetails from "./pages/Products/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import Shop from "./pages/Shop.jsx";
+import UserOrder from "./pages/User/UserOrder.jsx";
 
 // Private Route
 import PrivateRoute from "./components/PrivateRoute.jsx";
@@ -32,6 +33,7 @@ import CategoryList from "./pages/Admin/CategoryList.jsx";
 import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
+import OrderList from "./pages/Admin/OrderList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "shop",
         element: <Shop />,
+      },
+      {
+        path: "user-orders",
+        element: <UserOrder />,
       },
       // Private routes must auth
       {
@@ -109,6 +115,10 @@ const router = createBrowserRouter([
           {
             path: "allproductslist",
             element: <AllProducts />,
+          },
+          {
+            path: "orderlist",
+            element: <OrderList />,
           },
           {
             path: "product/update/:_id",
