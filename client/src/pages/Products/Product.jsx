@@ -8,10 +8,10 @@ const Product = ({ product }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="w-[30rem] rounded"
+          className="w-[30rem] h-[260px] rounded object-cover"
         />
+        <HeartIcon product={product} />
       </div>
-      <HeartIcon product={product} />
 
       <div className="p-4">
         <Link to={`/product/${product._id}`}>

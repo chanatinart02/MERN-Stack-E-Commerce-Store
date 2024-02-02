@@ -3,7 +3,7 @@ import HeartIcon from "./HeartIcon";
 
 const SmallProduct = ({ product }) => {
   return (
-    <div className="w-[20rem] ml-[2rem] p-3">
+    <div className="w-[20rem] ml-[4rem] p-3">
       <div className="relative">
         {" "}
         <img
@@ -12,10 +12,10 @@ const SmallProduct = ({ product }) => {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png"
           }
           alt={product.name}
-          className="h-auto rounded"
+          className="h-[200px] w-[296px] object-cover rounded"
         />
         <HeartIcon product={product} />
-        <div className="p-54">
+        <div className="p-4">
           <Link to={`/product/${product._id}`}>
             <h2 className="flex justify-between items-center">
               <div>{product.name}</div>

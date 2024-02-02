@@ -27,7 +27,7 @@ const ProductCarousel = () => {
     autoplaySpeed: 3000,
   };
   return (
-    <div className="mb-4 lg:block xl:block md:block">
+    <div className="mb-4 w-1/2 lg:block xl:block md:block">
       {isLoading ? null : error ? (
         <Message variant="danger">
           {error?.data?.message || error.message}
@@ -35,7 +35,7 @@ const ProductCarousel = () => {
       ) : (
         <Slider
           {...settings}
-          className="xl:w-[50rem]  lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block"
+          className="xl:w-[45rem]  lg:w-[40rem] md:w-[56rem] sm:w-[40rem] sm:block"
         >
           {product?.map(
             ({

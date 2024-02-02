@@ -15,7 +15,7 @@ const Home = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message various="danger">{error?.data.message || error.error}</Message>
+        <Message various="error">{error?.data.message || error.error}</Message>
       ) : (
         <>
           <div className="flex justify-between items-center">
