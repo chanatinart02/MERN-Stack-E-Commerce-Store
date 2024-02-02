@@ -34,6 +34,7 @@ import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
 import OrderList from "./pages/Admin/OrderList.jsx";
+import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
           {
             path: "product/update/:_id",
             element: <ProductUpdate />,
+          },
+          {
+            path: "dashboard",
+            element: <AdminDashboard />,
           },
         ],
       },
