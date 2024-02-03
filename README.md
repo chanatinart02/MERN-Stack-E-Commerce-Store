@@ -17,11 +17,11 @@ E-Commerce using MERN Stack. This comprehensive online shopping platform offers 
 
 ## Technologies Used
 
-**Frontend**: React.js, tailwindcss, react-redux/reduxjs/toolki
-**Backend**: Node.js and Express.js for server-side development.
-**Database**: MongoDB for efficient data storage.
-**Authentication**: JSON Web Tokens (JWT) for secure user authentication.
-**Payment**: PayPal integration for secure and convenient transactions.
+- **Frontend**: React.js, tailwindcss, react-redux/reduxjs/toolki
+- **Backend**: Node.js and Express.js for server-side development.
+- **Database**: MongoDB for efficient data storage.
+- **Authentication**: JSON Web Tokens (JWT) for secure user authentication.
+- **Payment**: PayPal integration for secure and convenient transactions.
 
 ## Screenshot
 
