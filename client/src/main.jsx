@@ -110,6 +110,10 @@ const router = createBrowserRouter([
             element: <CategoryList />,
           },
           {
+            path: "productlist",
+            element: <ProductList />,
+          },
+          {
             path: "productlist/:pageNumber",
             element: <ProductList />,
           },
