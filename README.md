@@ -25,4 +25,4 @@ E-Commerce using MERN Stack. This comprehensive online shopping platform offers 
 
 ## Screenshot
 
-[Link]()
+[Link](https://github.com/chanatinart02/MERN-Stack-E-Commerce-Store/tree/main/screenshot)
